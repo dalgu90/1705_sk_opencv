@@ -1,20 +1,19 @@
 import cv2
 import numpy as np
 
-# TODO: Description
+# In this tutorial, we use various (comparatively) recent object trackers offered by OpenCV.
 
 # Set up tracker.
 # MIL, BOOSTING, KCF, TLD, MEDIANFLOW or GOTURN
-tracker = cv2.Tracker_create("MIL")
+# (GOTURN need Caffe prototxt and finetuned caffemodel)
+tracker = cv2.Tracker_create("KCF")
 
 # Open a video and Read the first frame
-#in_fpath = "videos/basketball.mp4"
+in_fpath = "videos/basketball.mp4"
 #in_fpath = "videos/walking.mp4"
-#in_fpath = "videos/walking2.mp4"
-#in_fpath = "videos/vtest.mp4"
-#in_fpath = "videos/car.mp4"
-in_fpath = "videos/skating.mp4"
+#in_fpath = "videos/dog.mp4"
 
+# Open a video and grad the first frame
 v_in = cv2.VideoCapture(in_fpath)
 ret, frame = v_in.read()
 if not ret:
@@ -22,17 +21,14 @@ if not ret:
     sys.exit()
 
 # Define an initial bounding box(c, r, w, h)
-#bbox = (187, 218, 45, 100)  # videos/basketball.mp4
+bbox = (187, 218, 45, 100)  # videos/basketball.mp4
 #bbox = (530, 300, 30, 60)  # videos/walking.mp4
-#bbox = (125, 130, 40, 120)  # videos/walking2.mp4
-#bbox = (495, 155, 40, 80)  # videos/vtest.mp4
-#bbox = (100, 80, 170, 150)  # videos/car.mp4
-bbox = (290, 75, 70, 170)  # videos/skating.mp4
+#bbox = (180, 95, 70, 100)  # videos/dog.mp4
 
 # Uncomment this lines to see the track_window is set well
-img2 = cv2.rectangle(frame, (bbox[0], bbox[1]), (bbox[0]+bbox[2],bbox[1]+bbox[3]), (0,0,255))
-cv2.imshow('tracking',img2)
-cv2.waitKey(100000)
+#img2 = cv2.rectangle(frame, (bbox[0],bbox[1]), (bbox[0]+bbox[2],bbox[1]+bbox[3]), (0,0,255))
+#cv2.imshow('tracking',img2)
+#cv2.waitKey(100000)
 
 # Initialize tracker with first frame and bounding box
 ret = tracker.init(frame, bbox)

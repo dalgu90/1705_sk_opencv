@@ -1,17 +1,17 @@
 import cv2
 import numpy as np
 
-# TODO: Write a description
+# In this tutorial, we find a optical flow use cv2.calcOpticalFlowPyrLK(), which use Lucas-Kanade method,
+# to track feature points in a video.
 
-#in_fpath = "videos/walking.mp4"
+in_fpath = "videos/walking.mp4"
+#in_fpath = "videos/walking2.mp4"
 #in_fpath = "videos/vtest.mp4"
-#in_fpath = "videos/human.mp4"
-in_fpath = "videos/walking2.mp4"
 v_in = cv2.VideoCapture(in_fpath)
 
-# params for ShiTomasi corner detection
-feature_params = dict( maxCorners = 1000,
-                       qualityLevel = 0.3,
+# Parameters for ShiTomasi corner detection
+feature_params = dict( maxCorners = 200,
+                       qualityLevel = 0.01,
                        minDistance = 7,
                        blockSize = 7 )
 
@@ -21,7 +21,7 @@ lk_params = dict( winSize  = (15,15),
                   criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03))
 
 # Create some random colors
-color = np.random.randint(0, 255, (100,3))
+color = np.random.randint(0, 255, (200, 3))
 
 # Take first frame and find corners in it
 ret, old_frame = v_in.read()
@@ -60,7 +60,7 @@ while True:
         
     # Now update the previous frame and previous points
     old_gray = frame_gray.copy()
-    p0 = good_new.reshape(-1,1,2)
+    p0 = good_new.reshape(-1, 1, 2)
     
 cv2.destroyAllWindows()
 v_in.release()
