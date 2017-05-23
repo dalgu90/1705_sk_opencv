@@ -37,9 +37,9 @@ while(v_in.isOpened()):
         # Write the flipped frame
         v_out.write(frame)
         
-        # 'q' key to break
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+        # Wait a key press for 60ms
+        if cv2.waitKey(60) & 0xFF == ord('q'):
+            break  # 'q' key to break
     else:
         break
 
