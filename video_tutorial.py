@@ -3,7 +3,7 @@ import numpy as np
 import cv2 # OpenCV-Python
 
 # This tutorial code opens a video and saves the video with frame vertically flipped.
-# The code also create a named window and show the flipped video while processing.
+# The code also creates a named window and shows the flipped video while processing.
 
 # Open a video
 in_fpath = "videos/vtest.mp4"
@@ -28,13 +28,13 @@ while(v_in.isOpened()):
     # Grab a frame
     ret, frame = v_in.read()
     if ret==True:
-        # flip the frame vertically
+        # Flip the frame vertically
         frame = cv2.flip(frame, 0)
         
         # Draw the flipped frame on the window
         cv2.imshow('tutorial', frame)
         
-        # write the flipped frame
+        # Write the flipped frame
         v_out.write(frame)
         
         # 'q' key to break
